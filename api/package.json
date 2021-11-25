@@ -1,3 +1,5 @@
 {
-  "name": "console-view-api"
+  "name": "console-view-api",
+  "version": "0.0.0",
+  "private": true
 }

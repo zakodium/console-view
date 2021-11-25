@@ -1,3 +1,20 @@
 {
-  "name": "console-view-client"
+  "name": "console-view-client",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite --open"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^1.1.0",
+    "@zakodium/tailwind-config": "^2.0.3",
+    "autoprefixer": "^10.4.0",
+    "immer": "^9.0.7",
+    "postcss": "^8.4.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "tailwindcss": "^2.2.19",
+    "vite": "^2.6.14"
+  }
 }
