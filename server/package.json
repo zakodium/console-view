@@ -1,0 +1,8 @@
+{
+  "name": "console-view-server",
+  "type": "module",
+  "dependencies": {
+    "fastify": "^3.24.0",
+    "fastify-websocket": "^4.0.0"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "console-view",
+  "version": "0.0.0",
+  "description": "",
+  "workspaces": [
+    "api",
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "eslint": "eslint .",
+    "eslint-fix": "npm run eslint --fix",
+    "prettier": "prettier --check .",
+    "prettier-write": "prettier --write .",
+    "test": "npm run eslint && npm run prettier"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zakodium/console-view.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zakodium/console-view/issues"
+  },
+  "homepage": "https://github.com/zakodium/console-view#readme",
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-cheminfo": "^7.2.1",
+    "eslint-config-cheminfo-react": "^8.0.1",
+    "prettier": "^2.4.1"
+  }
+}
