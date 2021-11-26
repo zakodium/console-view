@@ -1,5 +1,6 @@
 import { useView } from './ViewContext';
 import ImageRenderer from './renderers/ImageRenderer';
+import JSONRenderer from './renderers/JSONRenderer';
 
 export default function ViewMain() {
   const { elements } = useView();
@@ -9,6 +10,8 @@ export default function ViewMain() {
         switch (element.kind) {
           case 'IMAGE':
             return <ImageRenderer key={element.id} {...element} />;
+          case 'JSON':
+            return <JSONRenderer key={element.id} {...element} />;
           default:
             throw new Error(`unknown element kind: ${element.kind}`);
         }

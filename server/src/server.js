@@ -1,38 +1,29 @@
-import { randomUUID } from 'crypto';
-
-import fastify from 'fastify';
+import Fastify from 'fastify';
 import fastifyWs from 'fastify-websocket';
 
-const imgSrc =
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
+import * as processManager from './processManager.js';
+import * as windowManager from './windowManager.js';
 
-const server = fastify({ logger: true });
+processManager.start();
 
-server.register(fastifyWs);
+const fastify = Fastify({ logger: true });
 
-server.get('/', () => {
-  return { hello: 'world' };
+fastify.register(fastifyWs);
+
+fastify.post('/message', (request) => {
+  windowManager.sendMessage(request.body);
+  return { ok: true };
 });
 
-server.get('/ws', { websocket: true }, (connection) => {
-  function dispatch(action) {
-    connection.socket.send(JSON.stringify(action));
-  }
-
-  const i1 = setInterval(() => {
-    dispatch({
-      type: 'ADD',
-      payload: { id: randomUUID(), kind: 'IMAGE', src: imgSrc },
-    });
-  }, 1000);
-  const i2 = setInterval(() => {
-    dispatch({ type: 'RESET' });
-  }, 15000);
-
+fastify.get('/ws', { websocket: true }, (connection, request) => {
+  const { windowId } = request.query;
+  windowManager.addConnection(windowId, connection);
   connection.socket.on('close', () => {
-    clearInterval(i1);
-    clearInterval(i2);
+    windowManager.closeConnection(windowId);
   });
 });
 
-await server.listen(3333);
+// TODO: change to 0.
+await fastify.listen(3333);
+
+processManager.setPort(fastify.server.address().port);

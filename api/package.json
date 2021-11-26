@@ -2,5 +2,8 @@
   "name": "console-view-api",
   "version": "0.0.0",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "got": "^11.8.3"
+  }
 }
