@@ -2,6 +2,7 @@ import { randomUUID } from 'crypto';
 
 import open from 'open';
 
+let activeConnections = 0;
 const connections = new Map();
 
 const messageQueue = new Map();
@@ -47,18 +48,19 @@ function drainQueue(id) {
 
 function openWindow(id) {
   connections.set(id, 'CONNECTING');
-  open(`http://localhost:3000#windowId=${id}`);
+  open(`http://localhost:3333#windowId=${id}`);
 }
 
 export function addConnection(windowId, connection) {
+  activeConnections++;
   connections.set(windowId, connection);
   drainQueue(windowId);
 }
 
 export function closeConnection(connectionId) {
+  activeConnections--;
+  if (activeConnections === 0) {
+    process.kill(process.pid);
+  }
   connections.delete(connectionId);
 }
-
-// function dispatch(action) {
-// connection.socket.send(JSON.stringify(action));
-// }

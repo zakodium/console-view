@@ -1,4 +1,7 @@
+import { fileURLToPath } from 'url';
+
 import Fastify from 'fastify';
+import fastifyStatic from 'fastify-static';
 import fastifyWs from 'fastify-websocket';
 
 import * as processManager from './processManager.js';
@@ -8,6 +11,10 @@ processManager.start();
 
 const fastify = Fastify({ logger: true });
 
+fastify.register(fastifyStatic, {
+  root: fileURLToPath(new URL('../../client/build', import.meta.url)),
+  prefix: '/',
+});
 fastify.register(fastifyWs);
 
 fastify.post('/message', (request) => {

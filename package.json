@@ -7,15 +7,23 @@
     "client",
     "server"
   ],
+  "exports": {
+    "./require": "./api/lib/require.cjs"
+  },
   "files": [
-    "api",
-    "client/build"
+    "api/lib",
+    "api/package.json",
+    "client/build",
+    "server/src",
+    "server/package.json"
   ],
   "scripts": {
+    "build": "npm run build -w api -w client",
     "dev-client": "npm run dev -w client",
     "dev-server": "npm run dev -w server",
     "eslint": "eslint .",
     "eslint-fix": "npm run eslint --fix",
+    "prepack": "npm run build",
     "prettier": "prettier --check .",
     "prettier-write": "prettier --write .",
     "test": "npm run eslint && npm run prettier"
@@ -34,6 +42,14 @@
     "eslint-config-cheminfo": "^7.2.1",
     "eslint-config-cheminfo-react": "^8.0.1",
     "nodemon": "^2.0.15",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "rollup": "^2.60.1"
+  },
+  "dependencies": {
+    "fastify": "^3.24.0",
+    "fastify-static": "^4.5.0",
+    "fastify-websocket": "^4.0.0",
+    "got": "^11.8.3",
+    "open": "^8.4.0"
   }
 }

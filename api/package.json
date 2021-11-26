@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build": "rollup src/require.js --file lib/require.cjs --format cjs"
+  },
   "dependencies": {
     "got": "^11.8.3"
   }
